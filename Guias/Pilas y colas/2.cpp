@@ -1,83 +1,66 @@
 #include <iostream>
 using namespace std;
 
-//Node structure
+// Node definition, a T type information field and a pointer to next element
 struct node {
-    int data;
+    int info;
     node* next;
 };
 
-//Function prototypes
-void push(int, node**);
-void traverseStack(node*);
-void pop(node** );
-node* top(node*);
+void push(int info, node** stack);
+node* top (node* stack);
+void pop(node** stack);
 
 int main(void) {
-    //Initializing node in Main
-    node* stack = NULL;
-    node* stack2 = NULL;
-    
-    //Fill stack process
-    for(int i = 0; i < 10; i++)
-        push(rand() % 100, &stack);
+    node* stk = NULL,* stk2 = NULL,* aux = NULL;
 
-    //Show elements in list
-    cout << "Elements in stack: \n" << endl;
-    traverseStack(stack);
-
-    for(int i = 0; i < 10; i++){
-        node* topInfo = top(stack);
-
-        push(topInfo->data, &stack2);
-
-        pop(&stack);
-
-        topInfo = topInfo->next;
+    for(int i = 0; i < 10; i++) {
+        push(rand() % 12, &stk);
     }
 
-    cout << endl << "Elements in stack: \n" << endl;
-    traverseStack(stack2);
+    aux = stk;
+
+    while(aux) {
+        cout << aux->info << "  ";
+        aux = aux->next;
+    }
+    cout << endl << endl;
+
+    for(int i = 0; i < 10; i++) {
+        push(top(stk)->info, &stk2);
+        pop(&stk);
+    }
+    delete[] stk;
+    
+    stk = stk2;
+
+    aux = stk;
+
+    while(aux) {
+        cout << aux->info << "  ";
+        aux = aux->next;
+    }
+    cout << endl;
 
     return 0;
 }
 
-//Function that makes the filling process in a stack
-void push(int data, node** stack) {
-
-    //Node assignation logic
-
+void push(int info, node** stack) {
     node* n = new node;
-    n->data = data;
+    n->info = info;
 
     n->next = *stack;
-
     *stack = n;
 }
 
-//Function that goes through the elements of the stack and shows them
-void traverseStack(node* stack) {
-    if(stack) {
-        cout << stack->data << " ";
-        traverseStack(stack->next);
-    }
-    else 
-        cout << endl;
+node* top (node* stack) {
+    node* n = new node;
+    n->info = stack->info;
+    n->next = NULL;
+
+    return n;
 }
 
-//Delete first position in stack
-void pop(node** stk) {
-    node* aux = *stk;
-    *stk = (*stk)->next;
-
-    delete aux;
+void pop(node** stack) {
+    *stack = (*stack)->next;
 }
-
-node* top(node* s){
-    node* r  = new node;
-    r->data = s->data;
-    s->next = NULL;
-
-    return r;
-}
-

@@ -20,8 +20,9 @@ int main(void) {
 
     for(int i = 0; i < 10; i++)
         push(rand() % 100, &q);
-
     
+    traverseQueue(q);
+
     return 0;
 }
 
