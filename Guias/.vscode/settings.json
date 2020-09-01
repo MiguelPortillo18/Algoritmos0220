@@ -1,0 +1,7 @@
+{   
+    "files.associations": {
+        "iostream": "cpp"
+    },
+    "C_Cpp.default.includePath": ["usr/include/c++/9"],
+    "C_Cpp.default.compilerPath": "/usr/bin/g++",
+}
