@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <label for="">Mensaje a desencriptar: </label>
+    <input type="text" name="" id="decrypt">
+    <label for="">Mensaje desencriptado: </label>
+    <input type="text" name="" id="decrypted">
+    <button id="b-decrypt">Desencriptar</button>
+</body>
+<script>
+    var str = document.getElementById("decrypt").value
+    var dcrypted = document.getElementById("decrypted")
+    var btn = document.getElementById("b-decrypt")
+
+    btn.onclick = (e) => {
+        str = document.getElementById("decrypt").value
+        str = decrytp(str)
+        decrypted.value = str
+    }
+
+    function decrytp(str) {
+        var aux = "", auxDolar = ""
+        for(let i = 0; i < str.length; i++) {
+            if(str.charAt(i) == "$")
+                auxDolar += "$"
+            else if(str.charAt(i) == "\\") {
+                console.log(auxDolar)
+                aux += codeToVowel(auxDolar)
+                auxDolar = ""
+            }
+            else
+                aux += str.charAt(i)
+        }
+
+        return aux;
+    }
+
+    function codeToVowel(str) {
+        switch(str) {
+            case "$$$":
+                return 'a'
+            case "$$":
+                return 'e'
+            case "$$$$$":
+                return 'i'
+            case "$":
+                return 'o'
+            case "$$$$":
+                return 'u'
+        }
+    }
+</script>
+</html>
