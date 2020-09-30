@@ -68,7 +68,7 @@ int main(void) {
     cout << endl;
 
     cout << "Comparing trees: \n";
-    compareTrees(treeA, treeB);x
+    compareTrees(treeA, treeB);
 
     return 0;
 }
