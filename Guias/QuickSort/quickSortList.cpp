@@ -69,7 +69,6 @@ node<T>* lastNode(node<T>* head) {
     return head;
 }
 
-// NULL 8 9 5 7 12 NULL
 template<class T>
 node<T>* partition(node<T>* low, node<T>* high) {
     T pivot = high->info;
@@ -83,9 +82,7 @@ node<T>* partition(node<T>* low, node<T>* high) {
             swap(&(i->info), &(j->info));
         }
     }
-    
-    // swap arr i + 1, arr high
-    // return i + 1
+
     i = (!i) ? low : i->next;
     swap(&(i->info), &(high->info));
     return i;
