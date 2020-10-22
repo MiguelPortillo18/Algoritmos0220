@@ -31,42 +31,42 @@ struct number {
 typedef number T;
 
 struct node {
-    T info;
+    int info;
     node* left, *right;
 
     node() : left(NULL), right(NULL) {}
-    node(T _info) : info(_info), left(NULL), right(NULL) {}
+    node(int _info) : info(_info), left(NULL), right(NULL) {}
 };
 
 void inOrder(node*);
-void verifyNodes(int, node*);
-void insertInTree(T, node**);
-void sendDataFromArray(int*, int, node**);
+void insertInTree(int, node**);
+void verifyNodes(int, int*, node*);
 
 int main(void) {
     node* tree = NULL;
     int n = 0;
 
-    insertInTree(T(25), &tree);
-    insertInTree(T(35), &tree);
-    insertInTree(T(15), &tree);
-    insertInTree(T(10), &tree);
-    insertInTree(T(1), &tree);
-    insertInTree(T(26), &tree);
-    insertInTree(T(17), &tree);
-    insertInTree(T(13), &tree);
-    insertInTree(T(18), &tree);
-    insertInTree(T(5), &tree);
+    insertInTree(25, &tree);
+    insertInTree(35, &tree);
+    insertInTree(15, &tree);
+    insertInTree(10, &tree);
+    insertInTree(1, &tree);
+    insertInTree(26, &tree);
+    insertInTree(17, &tree);
+    insertInTree(13, &tree);
+    insertInTree(18, &tree);
+    insertInTree(5, &tree);
 
     inOrder(tree);
     cout << endl;
 
-    verifyNodes(35,tree);
+    verifyNodes(25, 0, tree);
+    cout << endl;
     
     return 0;
 }
 
-void insertInTree(T info, node** tree) {
+void insertInTree(int info, node** tree) {
     if(!*tree)
         *tree = new node(info);
     else {
@@ -85,13 +85,15 @@ void inOrder(node* tree) {
     }
 }
 
-void verifyNodes(int n, node* tree) {
+void verifyNodes(int n, int* aux, node* tree) {
     if(tree) {
-        verifyNodes(n, tree->left);
+        *aux = tree->info;
 
-        if((tree->info + tree->info) == n)
+        verifyNodes(n, aux, tree->left);
+
+        if(*aux == tree->info)
             cout << tree->info << "\t";
 
-        verifyNodes(n, tree->right);
+        verifyNodes(n, aux, tree->right);
     }
 }
